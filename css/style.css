@@ -74,10 +74,24 @@ p {
   bottom: 300px;
 }
 
+.seth-img{
+  width: 300px;
+  margin: 100px auto 100px auto;
+  border-radius: 50%;
+}
+
 .skill-row {
   width: 50%;
   margin: 100px auto 100px auto;
   text-align: left;
+}
+
+.cert{
+  width: 100px;
+}
+.cert2{
+  position: relative;
+  width: 150px;
 }
 .skill-row2 {
   width: 50%;
@@ -105,7 +119,11 @@ p {
   margin-left: 30px;
 }
 
-.btn {
+.item{
+  width: 200px;
+}
+
+.button {
 	background-color:#66BFBF;
 	-webkit-border-top-left-radius:28px;
 	-moz-border-radius-topleft:28px;
