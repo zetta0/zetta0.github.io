@@ -73,25 +73,17 @@ p {
   left: 300px;
   bottom: 300px;
 }
-
-.seth-img{
-  width: 300px;
-  margin: 100px auto 100px auto;
+.seth{
+  width: 200px;
   border-radius: 50%;
 }
-
 .skill-row {
   width: 50%;
   margin: 100px auto 100px auto;
   text-align: left;
 }
-
 .cert{
-  width: 100px;
-}
-.cert2{
-  position: relative;
-  width: 150px;
+  width: 20%;
 }
 .skill-row2 {
   width: 50%;
@@ -119,11 +111,43 @@ p {
   margin-left: 30px;
 }
 
-.lang{
-  width: 200px;
+.flip-card {
+  padding-top: 40px;
+  padding-bottom: 40px;
+  background-color: transparent;
+  margin: auto;
+  width: 300px;
+  height: 200px;
+  perspective: 1000px; /* Remove this if you don't want the 3D effect */
 }
-
-.button {
+.flip-card-inner {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  text-align: center;
+  transition: transform 0.8s;
+  transform-style: preserve-3d;
+}
+.flip-card:hover .flip-card-inner {
+  transform: rotateY(180deg);
+}
+.flip-card-front, .flip-card-back {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  -webkit-backface-visibility: hidden; /* Safari */
+  backface-visibility: hidden;
+}
+.flip-card-front {
+  background-color:
+  color: black;
+}
+.flip-card-back {
+  background-color: #66BFBF;
+  color: white;
+  transform: rotateY(180deg);
+}
+.btn {
 	background-color:#66BFBF;
 	-webkit-border-top-left-radius:28px;
 	-moz-border-radius-topleft:28px;
@@ -150,7 +174,7 @@ height:50px;
 width:140px;
 	text-decoration:none;
 	text-align:center;
-  margin-bottom: 20px;
+  margin-bottom: 10px;
 }
 
 .btn:hover{
