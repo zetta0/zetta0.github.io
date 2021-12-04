@@ -85,6 +85,9 @@ p {
 .cert{
   width: 20%;
 }
+.center-cert{
+  text-align: center;
+}
 .skill-row2 {
   width: 50%;
   margin: 100px auto 100px auto;
