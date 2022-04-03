@@ -19,24 +19,24 @@ h1 {
   margin-top: 0;
   margin-bottom: 0;
   font-family: 'Sacramento', cursive;
-  color: #66BFBF;
+  color: black;
 }
 
 h2 {
   font-family: "Montserrat", sans-serif;
   font-size: 2rem;
-  color: #66BFBF;
+  color: black;
   font-weight: normal;
   line-height: 2;
 }
 
 h3 {
   font-family: "Montserrat", sans-serif;
-  color: #11999E
+  color: black;
 }
 
 a {
-  color: #11999E;
+  color: white;
   font-family: 'Montserrat', sans-serif;
   margin: 10px 20px;
   text-decoration: none;
@@ -49,9 +49,88 @@ p {
 }
 
 .top-container {
-  background-color: #E4F9F5;
+
   position: relative;
   padding-top: 100px;
+}
+.container {
+  color: var(--color);
+  font-size: 1.5rem;
+  display: flex;
+  flex-direction: column;
+}
+
+.right {
+  text-align: right;
+  width: 100%;
+}
+
+.stack {
+  display: grid;
+  grid-template-columns: 1fr;
+}
+
+.stack span {
+  font-weight: bold;
+  grid-row-start: 1;
+  grid-column-start: 1;
+  font-size: 4rem;
+  --stack-height: calc(100% / var(--stacks) - 1px);
+  --inverse-index: calc(calc(var(--stacks) - 1) - var(--index));
+  --clip-top: calc(var(--stack-height) * var(--index));
+  --clip-bottom: calc(var(--stack-height) * var(--inverse-index));
+  clip-path: inset(var(--clip-top) 0 var(--clip-bottom) 0);
+  animation: stack 340ms cubic-bezier(.46, .29, 0, 1.24) 1 backwards calc(var(--index) * 120ms), glitch 2s ease infinite 2s alternate-reverse;
+}
+
+.stack span:nth-child(odd) {
+  --glitch-translate: 8px;
+}
+
+.stack span:nth-child(even) {
+  --glitch-translate: -8px;
+}
+
+@keyframes stack {
+  0% {
+    opacity: 0;
+    transform: translateX(-50%);
+    text-shadow: -2px 3px 0 red, 2px -3px 0 blue;
+  }
+
+  ;
+
+  60% {
+    opacity: 0.5;
+    transform: translateX(50%);
+  }
+
+  80% {
+    transform: none;
+    opacity: 1;
+    text-shadow: 2px -3px 0 red, -2px 3px 0 blue;
+  }
+
+  100% {
+    text-shadow: none;
+  }
+}
+
+@keyframes glitch {
+  0% {
+    text-shadow: -2px 3px 0 red, 2px -3px 0 blue;
+    transform: translate(var(--glitch-translate));
+  }
+
+  2% {
+    text-shadow: 2px -3px 0 red, -2px 3px 0 blue;
+  }
+
+  4%,
+  100% {
+    text-shadow: none;
+    transform: none;
+  }
 }
 .middle-container {
   margin: 100px 0;
@@ -59,59 +138,18 @@ p {
 }
 
 .bottom-container {
-  background-color: #66BFBF;
+  background-color: black;
   padding: 50px 0 20px;
 }
 
-.top-cloud {
-  position: absolute;
-  right: 300px;
-  top: 50px;
-}
-.bottom-cloud {
-  position: absolute;
-  left: 300px;
-  bottom: 300px;
-}
 .seth{
   width: 200px;
   border-radius: 50%;
-}
-.skill-row {
-  width: 50%;
-  margin: 100px auto 100px auto;
-  text-align: left;
-}
-.cert{
-  width: 20%;
-}
-.center-cert{
-  text-align: center;
-}
-.skill-row2 {
-  width: 50%;
-  margin: 100px auto 100px auto;
-  text-align: right;
-}
-.pro {
-  text-decoration: underline;
 }
 
 .intro{
   width: 30%;
   margin: auto;
-}
-.computer {
-  width: 25%;
-  float: left;
-  margin-right: 30px;
-}
-
-.code {
-  width: 15%;
-  height: 25%;
-  float: right;
-  margin-left: 30px;
 }
 
 .projects{
@@ -125,7 +163,7 @@ p {
 }
 
 .btn {
-	background-color:#66BFBF;
+	background-color:black;
 	-webkit-border-top-left-radius:28px;
 	-moz-border-radius-topleft:28px;
 	border-top-left-radius:28px;
@@ -139,7 +177,7 @@ p {
 	-moz-border-radius-bottomleft:28px;
 	border-bottom-left-radius:28px;
 text-indent:0;
-	border:1px solid #66BFBF;
+	border:1px solid black;
 	display:inline-block;
 	color:#ffffff;
 	font-family:'Montserrat', sans-serif;
@@ -155,7 +193,7 @@ width:140px;
 }
 
 .btn:hover{
-  background-color: #30e3cb
+  background-color: blue
 }
 
 .contact-message {
