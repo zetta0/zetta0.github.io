@@ -7,7 +7,7 @@ body {
 
 hr {
   border-style: none;
-  border-top-style: dotted;
+  border-top-style: line-through;
   border-color: #EAF6F6;
   border-width: 5px;
   width: 5%;
@@ -52,6 +52,8 @@ p {
 
   position: relative;
   padding-top: 100px;
+  border-bottom-left-radius: 20%;
+  border-bottom-right-radius: 20%;
 }
 .container {
   color: var(--color);
@@ -142,6 +144,9 @@ p {
   padding: 50px 0 20px;
 }
 
+.skills{
+  width: 75px;
+}
 .seth{
   width: 200px;
   border-radius: 50%;
@@ -159,46 +164,7 @@ p {
 
 .cli-resume{
   border-radius: 25px;
-  width: 70%;
-}
-
-.btn {
-	background-color:black;
-	-webkit-border-top-left-radius:28px;
-	-moz-border-radius-topleft:28px;
-	border-top-left-radius:28px;
-	-webkit-border-top-right-radius:28px;
-	-moz-border-radius-topright:28px;
-	border-top-right-radius:28px;
-	-webkit-border-bottom-right-radius:28px;
-	-moz-border-radius-bottomright:28px;
-	border-bottom-right-radius:28px;
-	-webkit-border-bottom-left-radius:28px;
-	-moz-border-radius-bottomleft:28px;
-	border-bottom-left-radius:28px;
-text-indent:0;
-	border:1px solid black;
-	display:inline-block;
-	color:#ffffff;
-	font-family:'Montserrat', sans-serif;
-	font-size:15px;
-	font-weight:bold;
-	font-style:normal;
-height:50px;
-	line-height:50px;
-width:140px;
-	text-decoration:none;
-	text-align:center;
-  margin-bottom: 10px;
-}
-
-.btn:hover{
-  background-color: blue
-}
-
-.contact-message {
-  width: 40%;
-  margin: 40px auto 60px auto;
+  width: 50%;
 }
 
 .copyright {
