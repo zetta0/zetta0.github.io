@@ -157,6 +157,14 @@ p {
   margin: auto;
 }
 
+.tcm-links{
+  color:blue;
+}
+
+.tcm-links:hover{
+  color:black;
+}
+
 .projects{
   padding-top: 100px;
   text-align: center;
