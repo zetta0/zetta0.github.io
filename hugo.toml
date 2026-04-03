@@ -26,3 +26,6 @@ pagination.pagerSize = 10
   name = "Blog"
   url = "/posts"
 
+[caches]
+  [caches.images]
+    dir = ':cacheDir/images'
