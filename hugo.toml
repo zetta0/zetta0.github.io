@@ -11,7 +11,7 @@ pagination.pagerSize = 10
   dateformNumTime = "2006-01-02 15:04"
   [[params.social]]
     name = "linkedin"
-    url  = "https://www.linkedin.com/sethtemplet"
+    url  = "https://www.linkedin.com/in/sethtemplet"
   [[params.social]]
     name = "email"
     url  = "mailto:seth@templ.et"
