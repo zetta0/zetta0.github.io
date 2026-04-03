@@ -1,0 +1,28 @@
+baseURL = 'https://example.org/'
+locale = 'en-us'
+title = 'Seth Templet'
+theme = 'hello-friend-ng'
+pagination.pagerSize = 10
+
+[params]
+  dateform = "Jan 2, 2006"
+  dateformShort = "Jan 2"
+  dateforNum = "2006-01-02"
+  dateformNumTime = "2006-01-02 15:04"
+  [[params.social]]
+    name = "linkedin"
+    url  = "https://www.linkedin.com/sethtemplet"
+  [[params.social]]
+    name = "email"
+    url  = "mailto:seth@templ.et"
+
+[taxonomies]
+  category = "categories"
+  tag = "tags"
+
+
+[[menu.main]]
+  identifer = "blog"
+  name = "Blog"
+  url = "/posts"
+

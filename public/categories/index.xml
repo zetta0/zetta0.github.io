@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Categories on Seth Templet</title>
+    <link>http://localhost:1313/categories/</link>
+    <description>Recent content in Categories on Seth Templet</description>
+    <generator>Hugo</generator>
+    <language>en-us</language>
+    <lastBuildDate>Fri, 03 Apr 2026 00:00:00 +0000</lastBuildDate>
+    <atom:link href="http://localhost:1313/categories/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Threat Hunting</title>
+      <link>http://localhost:1313/categories/threat-hunting/</link>
+      <pubDate>Fri, 03 Apr 2026 00:00:00 +0000</pubDate>
+      <guid>http://localhost:1313/categories/threat-hunting/</guid>
+      <description></description>
+    </item>
+    <item>
+      <title>Offensive Security</title>
+      <link>http://localhost:1313/categories/offensive-security/</link>
+      <pubDate>Sat, 03 Dec 2022 00:00:00 +0000</pubDate>
+      <guid>http://localhost:1313/categories/offensive-security/</guid>
+      <description></description>
+    </item>
+    <item>
+      <title>Web Hacking</title>
+      <link>http://localhost:1313/categories/web-hacking/</link>
+      <pubDate>Wed, 17 Feb 2021 00:00:00 +0000</pubDate>
+      <guid>http://localhost:1313/categories/web-hacking/</guid>
+      <description></description>
+    </item>
+  </channel>
+</rss>

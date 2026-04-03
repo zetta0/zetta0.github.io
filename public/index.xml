@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Seth Templet</title>
+    <link>http://localhost:1313/</link>
+    <description>Recent content on Seth Templet</description>
+    <generator>Hugo</generator>
+    <language>en-us</language>
+    <lastBuildDate>Fri, 03 Apr 2026 00:00:00 +0000</lastBuildDate>
+    <atom:link href="http://localhost:1313/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title></title>
+      <link>http://localhost:1313/posts/attrib-hunting/</link>
+      <pubDate>Fri, 03 Apr 2026 00:00:00 +0000</pubDate>
+      <guid>http://localhost:1313/posts/attrib-hunting/</guid>
+      <description>&lt;h2 id=&#34;checking-for-processes-that-are-hiding-files-in-windows-os&#34;&gt;Checking for processes that are hiding files in Windows OS&lt;/h2&gt;&#xA;&lt;p&gt;This is to help with threat hunting the recent PCPcats TTP.&lt;/p&gt;&#xA;&lt;pre tabindex=&#34;0&#34;&gt;&lt;code class=&#34;language-kql&#34; data-lang=&#34;kql&#34;&gt;DeviceProcessEvents&#xD;&#xA;| where FileName =~ &amp;#34;attrib.exe&amp;#34; or ProcessVersionInfoOriginalFileName =~ &amp;#34;attrib.exe&amp;#34;&#xD;&#xA;| where ProcessCommandLine has &amp;#34;+h&amp;#34;&#xD;&#xA;| where InitiatingProcessFolderPath has_any (&#xD;&#xA;    @&amp;#34;windows\system32&amp;#34;,&#xD;&#xA;    @&amp;#34;windows\syswow64&amp;#34;,&#xD;&#xA;    @&amp;#34;program files&amp;#34;,&#xD;&#xA;    @&amp;#34;program files (x86)&amp;#34;,&#xD;&#xA;    @&amp;#34;windows\&amp;#34;&#xD;&#xA;)&#xD;&#xA;| extend suspicious_path = case(&#xD;&#xA;    ProcessCommandLine matches regex @&amp;#34;(?i)\\Users\\.*\+h&amp;#34;,   &#xD;&#xA;    ProcessCommandLine matches regex @&amp;#34;(?i)\\Temp\\.*\+h&amp;#34;,        &#xD;&#xA;    ProcessCommandLine matches regex @&amp;#34;(?i)\\AppData\\.*\+h&amp;#34;,     &#xD;&#xA;    ProcessCommandLine matches regex @&amp;#34;(?i)\\ProgramData\\.*\+h&amp;#34;,&#xD;&#xA;    ProcessCommandLine matches regex @&amp;#34;(?i)\\Windows\\.*\+h&amp;#34;, &#xD;&#xA;    &amp;#34;Other - Low&amp;#34;&#xD;&#xA;)&#xD;&#xA;| project&#xD;&#xA;    TimeGenerated,&#xD;&#xA;    DeviceName,&#xD;&#xA;    AccountName,&#xD;&#xA;    FolderPath,&#xD;&#xA;    ProcessCommandLine,&#xD;&#xA;    InitiatingProcessFolderPath,&#xD;&#xA;    InitiatingProcessCommandLine,&#xD;&#xA;    suspicious_path&#xD;&#xA;| sort by TimeGenerated desc&#xA;&lt;/code&gt;&lt;/pre&gt;</description>
+    </item>
+    <item>
+      <title>Me</title>
+      <link>http://localhost:1313/about/about/</link>
+      <pubDate>Fri, 03 Apr 2026 00:00:00 +0000</pubDate>
+      <guid>http://localhost:1313/about/about/</guid>
+      <description>&lt;p&gt;This site is a sub site under &amp;ldquo;about&amp;rdquo;.&lt;/p&gt;</description>
+    </item>
+    <item>
+      <title></title>
+      <link>http://localhost:1313/posts/upgrading-shell/</link>
+      <pubDate>Sat, 03 Dec 2022 00:00:00 +0000</pubDate>
+      <guid>http://localhost:1313/posts/upgrading-shell/</guid>
+      <description>&lt;h2 id=&#34;make-an-interactive-reverse-shell&#34;&gt;Make an interactive reverse shell&lt;/h2&gt;&#xA;&lt;p&gt;It&amp;rsquo;s annoying to get a primitive shell on a linux box so this walkthrough will show you how to create an interactive shell.&lt;/p&gt;&#xA;&lt;p&gt;First check which version of python is installed.&lt;/p&gt;&#xA;&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;which python python2 python3&#xA;&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;Next we create our new shell from pty.&lt;/p&gt;&#xA;&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;python3 -c &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;import pty; pty.spawn(&amp;#34;/bin/bash&amp;#34;)&amp;#39;&lt;/span&gt;&#xA;&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;Then we background the job back to our attacker box&lt;/p&gt;&#xA;&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;CTRL + Z&#xA;&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;Then we set our size and raw&lt;/p&gt;</description>
+    </item>
+    <item>
+      <title></title>
+      <link>http://localhost:1313/posts/xxe-attacks/</link>
+      <pubDate>Wed, 17 Feb 2021 00:00:00 +0000</pubDate>
+      <guid>http://localhost:1313/posts/xxe-attacks/</guid>
+      <description>&lt;p&gt;Detection:&lt;/p&gt;&#xA;&lt;pre tabindex=&#34;0&#34;&gt;&lt;code class=&#34;language-&lt;?xml&#34; data-lang=&#34;&lt;?xml&#34;&gt; &amp;lt;!DOCTYPE example [&#xD;&#xA;  &amp;lt;!ENTITY file &amp;#34;Hello!&amp;#34;&amp;gt;&#xD;&#xA; ]&amp;gt;&#xD;&#xA; &amp;lt;example&amp;gt;&amp;amp;file;&amp;lt;/example&amp;gt; &#xA;&lt;/code&gt;&lt;/pre&gt;&lt;p&gt;Check for /etc/passwd using SYSTEM keyword&lt;/p&gt;&#xA;&lt;pre tabindex=&#34;0&#34;&gt;&lt;code class=&#34;language-&lt;?xml&#34; data-lang=&#34;&lt;?xml&#34;&gt; &amp;lt;!DOCTYPE example [&#xD;&#xA;  &amp;lt;!ENTITY file SYSTEM &amp;#34;file:///example.txt&amp;#34;&amp;gt;&#xD;&#xA; ]&amp;gt;&#xD;&#xA; &amp;lt;example&amp;gt;&amp;amp;file;&amp;lt;/example&amp;gt;&#xA;&lt;/code&gt;&lt;/pre&gt;&lt;p&gt;When the SYSTEM keyword does not work, you can replace it with the&#xA;PUBLIC keyword instead. This tag requires you to supply an ID surrounded by&#xA;quotes after the PUBLIC keyword. The parser uses this to generate an alternate&#xA;URL for the value of the entity. For our purposes, you can just use a random&#xA;string in its place&lt;/p&gt;</description>
+    </item>
+  </channel>
+</rss>
