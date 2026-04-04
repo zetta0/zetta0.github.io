@@ -1,8 +1,8 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
     <channel>
-        <title>Posts on Seth Templet</title>
+        <title>Posts on Seth</title>
         <link>http://localhost:1313/posts/</link>
-        <description>Recent content in Posts on Seth Templet</description>
+        <description>Recent content in Posts on Seth</description>
         <generator>Hugo -- gohugo.io</generator>
         <language>en-us</language>
         <lastBuildDate>Fri, 03 Apr 2026 00:00:00 +0000</lastBuildDate>
@@ -115,7 +115,8 @@
             <pubDate>Wed, 17 Feb 2021 00:00:00 +0000</pubDate>
             
             <guid>http://localhost:1313/posts/xxe-attacks/</guid>
-            <description>&lt;p&gt;Detection:&lt;/p&gt;
+            <description>&lt;h2 id=&#34;cheatsheet-for-xxe-attacks&#34;&gt;Cheatsheet for XXE attacks&lt;/h2&gt;
+&lt;p&gt;Detection:&lt;/p&gt;
 &lt;pre tabindex=&#34;0&#34;&gt;&lt;code class=&#34;language-&lt;?xml&#34; data-lang=&#34;&lt;?xml&#34;&gt; &amp;lt;!DOCTYPE example [
   &amp;lt;!ENTITY file &amp;#34;Hello!&amp;#34;&amp;gt;
  ]&amp;gt;
@@ -130,7 +131,8 @@ PUBLIC keyword instead. This tag requires you to supply an ID surrounded by
 quotes after the PUBLIC keyword. The parser uses this to generate an alternate
 URL for the value of the entity. For our purposes, you can just use a random
 string in its place&lt;/p&gt;</description>
-            <content type="html"><![CDATA[<p>Detection:</p>
+            <content type="html"><![CDATA[<h2 id="cheatsheet-for-xxe-attacks">Cheatsheet for XXE attacks</h2>
+<p>Detection:</p>
 <pre tabindex="0"><code class="language-<?xml" data-lang="<?xml"> &lt;!DOCTYPE example [
   &lt;!ENTITY file &#34;Hello!&#34;&gt;
  ]&gt;

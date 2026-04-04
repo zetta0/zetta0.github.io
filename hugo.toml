@@ -1,6 +1,6 @@
-baseURL = 'https://example.org/'
+baseURL = 'https://seth.templ.et'
 locale = 'en-us'
-title = 'Seth Templet'
+title = 'Seth'
 theme = 'hello-friend-ng'
 pagination.pagerSize = 10
 
@@ -9,6 +9,7 @@ pagination.pagerSize = 10
   dateformShort = "Jan 2"
   dateforNum = "2006-01-02"
   dateformNumTime = "2006-01-02 15:04"
+  greeting = "hacker"
   [[params.social]]
     name = "linkedin"
     url  = "https://www.linkedin.com/in/sethtemplet"

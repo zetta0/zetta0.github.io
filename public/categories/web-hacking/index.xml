@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="utf-8" standalone="yes"?>
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
-    <title>Web Hacking on Seth Templet</title>
+    <title>Web Hacking on Seth</title>
     <link>http://localhost:1313/categories/web-hacking/</link>
-    <description>Recent content in Web Hacking on Seth Templet</description>
+    <description>Recent content in Web Hacking on Seth</description>
     <generator>Hugo</generator>
     <language>en-us</language>
     <lastBuildDate>Wed, 17 Feb 2021 00:00:00 +0000</lastBuildDate>
@@ -13,7 +13,7 @@
       <link>http://localhost:1313/posts/xxe-attacks/</link>
       <pubDate>Wed, 17 Feb 2021 00:00:00 +0000</pubDate>
       <guid>http://localhost:1313/posts/xxe-attacks/</guid>
-      <description>&lt;p&gt;Detection:&lt;/p&gt;&#xA;&lt;pre tabindex=&#34;0&#34;&gt;&lt;code class=&#34;language-&lt;?xml&#34; data-lang=&#34;&lt;?xml&#34;&gt; &amp;lt;!DOCTYPE example [&#xD;&#xA;  &amp;lt;!ENTITY file &amp;#34;Hello!&amp;#34;&amp;gt;&#xD;&#xA; ]&amp;gt;&#xD;&#xA; &amp;lt;example&amp;gt;&amp;amp;file;&amp;lt;/example&amp;gt; &#xA;&lt;/code&gt;&lt;/pre&gt;&lt;p&gt;Check for /etc/passwd using SYSTEM keyword&lt;/p&gt;&#xA;&lt;pre tabindex=&#34;0&#34;&gt;&lt;code class=&#34;language-&lt;?xml&#34; data-lang=&#34;&lt;?xml&#34;&gt; &amp;lt;!DOCTYPE example [&#xD;&#xA;  &amp;lt;!ENTITY file SYSTEM &amp;#34;file:///example.txt&amp;#34;&amp;gt;&#xD;&#xA; ]&amp;gt;&#xD;&#xA; &amp;lt;example&amp;gt;&amp;amp;file;&amp;lt;/example&amp;gt;&#xA;&lt;/code&gt;&lt;/pre&gt;&lt;p&gt;When the SYSTEM keyword does not work, you can replace it with the&#xA;PUBLIC keyword instead. This tag requires you to supply an ID surrounded by&#xA;quotes after the PUBLIC keyword. The parser uses this to generate an alternate&#xA;URL for the value of the entity. For our purposes, you can just use a random&#xA;string in its place&lt;/p&gt;</description>
+      <description>&lt;h2 id=&#34;cheatsheet-for-xxe-attacks&#34;&gt;Cheatsheet for XXE attacks&lt;/h2&gt;&#xA;&lt;p&gt;Detection:&lt;/p&gt;&#xA;&lt;pre tabindex=&#34;0&#34;&gt;&lt;code class=&#34;language-&lt;?xml&#34; data-lang=&#34;&lt;?xml&#34;&gt; &amp;lt;!DOCTYPE example [&#xD;&#xA;  &amp;lt;!ENTITY file &amp;#34;Hello!&amp;#34;&amp;gt;&#xD;&#xA; ]&amp;gt;&#xD;&#xA; &amp;lt;example&amp;gt;&amp;amp;file;&amp;lt;/example&amp;gt; &#xA;&lt;/code&gt;&lt;/pre&gt;&lt;p&gt;Check for /etc/passwd using SYSTEM keyword&lt;/p&gt;&#xA;&lt;pre tabindex=&#34;0&#34;&gt;&lt;code class=&#34;language-&lt;?xml&#34; data-lang=&#34;&lt;?xml&#34;&gt; &amp;lt;!DOCTYPE example [&#xD;&#xA;  &amp;lt;!ENTITY file SYSTEM &amp;#34;file:///example.txt&amp;#34;&amp;gt;&#xD;&#xA; ]&amp;gt;&#xD;&#xA; &amp;lt;example&amp;gt;&amp;amp;file;&amp;lt;/example&amp;gt;&#xA;&lt;/code&gt;&lt;/pre&gt;&lt;p&gt;When the SYSTEM keyword does not work, you can replace it with the&#xA;PUBLIC keyword instead. This tag requires you to supply an ID surrounded by&#xA;quotes after the PUBLIC keyword. The parser uses this to generate an alternate&#xA;URL for the value of the entity. For our purposes, you can just use a random&#xA;string in its place&lt;/p&gt;</description>
     </item>
   </channel>
 </rss>

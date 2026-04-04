@@ -6,7 +6,7 @@
 
 <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 <meta name="author" content="">
-<meta name="description" content="Detection:
+<meta name="description" content="Cheatsheet for XXE attacks Detection:
 &lt;!DOCTYPE example [&lt;!ENTITY file &#34;Hello!&#34;&gt;]&gt;&lt;example&gt;&amp;file;&lt;/example&gt; Check for /etc/passwd using SYSTEM keyword
 &lt;!DOCTYPE example [&lt;!ENTITY file SYSTEM &#34;file:///example.txt&#34;&gt;]&gt;&lt;example&gt;&amp;file;&lt;/example&gt; When the SYSTEM keyword does not work, you can replace it with the PUBLIC keyword instead. This tag requires you to supply an ID surrounded by quotes after the PUBLIC keyword. The parser uses this to generate an alternate URL for the value of the entity. For our purposes, you can just use a random string in its place
 " />
@@ -18,7 +18,7 @@
 
     <title>
         
-             :: Seth Templet 
+             :: Seth 
         
     </title>
 
@@ -42,18 +42,18 @@
 
 
 
-  <meta itemprop="name" content="Seth Templet">
-  <meta itemprop="description" content="Detection:
+  <meta itemprop="name" content="Seth">
+  <meta itemprop="description" content="Cheatsheet for XXE attacks Detection:
 &lt;!DOCTYPE example [&lt;!ENTITY file &#34;Hello!&#34;&gt;]&gt;&lt;example&gt;&amp;file;&lt;/example&gt; Check for /etc/passwd using SYSTEM keyword
 &lt;!DOCTYPE example [&lt;!ENTITY file SYSTEM &#34;file:///example.txt&#34;&gt;]&gt;&lt;example&gt;&amp;file;&lt;/example&gt; When the SYSTEM keyword does not work, you can replace it with the PUBLIC keyword instead. This tag requires you to supply an ID surrounded by quotes after the PUBLIC keyword. The parser uses this to generate an alternate URL for the value of the entity. For our purposes, you can just use a random string in its place">
   <meta itemprop="datePublished" content="2021-02-17T00:00:00+00:00">
   <meta itemprop="dateModified" content="2021-02-17T00:00:00+00:00">
-  <meta itemprop="wordCount" content="244">
+  <meta itemprop="wordCount" content="248">
   <meta itemprop="keywords" content="Web Hacking">
 
   <meta name="twitter:card" content="summary">
-  <meta name="twitter:title" content="Seth Templet">
-  <meta name="twitter:description" content="Detection:
+  <meta name="twitter:title" content="Seth">
+  <meta name="twitter:description" content="Cheatsheet for XXE attacks Detection:
 &lt;!DOCTYPE example [&lt;!ENTITY file &#34;Hello!&#34;&gt;]&gt;&lt;example&gt;&amp;file;&lt;/example&gt; Check for /etc/passwd using SYSTEM keyword
 &lt;!DOCTYPE example [&lt;!ENTITY file SYSTEM &#34;file:///example.txt&#34;&gt;]&gt;&lt;example&gt;&amp;file;&lt;/example&gt; When the SYSTEM keyword does not work, you can replace it with the PUBLIC keyword instead. This tag requires you to supply an ID surrounded by quotes after the PUBLIC keyword. The parser uses this to generate an alternate URL for the value of the entity. For our purposes, you can just use a random string in its place">
 
@@ -140,7 +140,8 @@
                 
 
                 <div class="post-content">
-                    <p>Detection:</p>
+                    <h2 id="cheatsheet-for-xxe-attacks">Cheatsheet for XXE attacks</h2>
+<p>Detection:</p>
 <pre tabindex="0"><code class="language-<?xml" data-lang="<?xml"> &lt;!DOCTYPE example [
   &lt;!ENTITY file &#34;Hello!&#34;&gt;
  ]&gt;
