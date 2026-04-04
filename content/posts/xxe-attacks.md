@@ -12,6 +12,7 @@ type = "post"
 tag = "web"
 +++
 
+## Cheatsheet for XXE attacks
 
 Detection:
 
